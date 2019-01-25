@@ -2,4 +2,60 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: azure;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.tweet {
+  display: flex;
+  width: 100%;
+  max-width: 590px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.avatar {
+  height: 50px;
+  border-radius: 25px;
+  margin: 10px;
+}
+
+.tweet-info {
+  margin: 10px;
+  flex-direction: column;
+}
+
+.tweet-icons {
+  display: flex;
+  align-items: center;
+}
+
+.timestamp {
+  color: #969696;
+  font-size: 15px;
+}
+
+.replying-to {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #969696;
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
 }

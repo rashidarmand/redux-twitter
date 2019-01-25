@@ -7,8 +7,8 @@ const AUTHED_ID = 'dan_abramov';
 
 export default function handleGetInitialData() {
   return (dispatch) => {
-    return getInitialData
-      .then(([ users, tweets ]) => {
+    return getInitialData()
+      .then(({ users, tweets }) => {
         dispatch(receiveUsers(users));
         dispatch(receiveTweets(tweets));
         dispatch(setAuthedUser(AUTHED_ID));

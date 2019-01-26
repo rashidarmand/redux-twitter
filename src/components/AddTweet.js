@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 
 class AddTweet extends Component {
@@ -38,7 +37,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+
   }
 }
 

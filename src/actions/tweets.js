@@ -20,22 +20,24 @@ function likeTweet({ id, hasLiked, authedUser}) {
   }
 }
 
-function addTweet({ text, author, replyingTo }) {
+function addTweet(formattedTweet) {
   return {
     type: ADD_TWEET,
-    text,
-    author,
-    replyingTo
+    tweet: formattedTweet,
+    author: formattedTweet.author,
+    parentTweet: formattedTweet.replyingTo
   }
 }
 
 export function handleAddTweet(newTweet) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
-    newTweet.author = authedUser;
 
     saveTweet(newTweet)
-      .then(() => dispatch(addTweet(newTweet)))
+      .then((formattedTweet) => {
+        formattedTweet.authedUser = authedUser;
+        dispatch(addTweet(formattedTweet))
+      })
   }
 }
 

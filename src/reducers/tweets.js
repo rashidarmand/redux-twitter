@@ -1,5 +1,4 @@
 import { RECEIVE_TWEETS, LIKE_TWEET, ADD_TWEET } from '../actions/tweets';
-import { formatTweet } from '../utils/helpers';
 
 export default function tweets(state = {}, action) {
   switch(action.type) {
@@ -8,7 +7,7 @@ export default function tweets(state = {}, action) {
         ...state,
         ...action.tweets
       }
-      
+
     case LIKE_TWEET :
       const { id, hasLiked, authedUser } = action;
 
@@ -23,16 +22,11 @@ export default function tweets(state = {}, action) {
       }
 
     case ADD_TWEET :
-      const { text, author, replyingTo } = action;
-      const formattedTweet = formatTweet({
-        text,
-        author,
-        replyingTo
-      })
+      const { tweet } = action;
 
       return {
         ...state,
-        [formattedTweet.id] : formattedTweet
+        [tweet.id] : tweet
       }
 
     default :

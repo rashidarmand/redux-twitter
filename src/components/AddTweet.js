@@ -7,16 +7,18 @@ class AddTweet extends Component {
     tweetText: ''
   }
 
-  handleSubmit = () => {
-    const { saveTweet } = this.props;
-    const {tweetText } = this.state;
-    // @TODO get saveTweet dispatch working to add a new tweet
-    // Include author & replyingTo
-    // saveTweet({
-    //   text: this.state.tweetText,
-    //   author: ,
-    //   replyingTo: 
-    // })
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { saveTweet, author } = this.props;
+
+    saveTweet({
+      text: this.state.tweetText,
+      author,
+      replyingTo: null
+    })
+
+    e.target.firstChild.value = '';
+    this.setState({ tweetText: '' });
   }
 
   handleChange = ({ target }) => {
@@ -44,8 +46,8 @@ class AddTweet extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  
+const mapStateToProps = ({ authedUser }) => ({
+  author: authedUser
 })
 
 const mapDispatchToProps = (dispatch) => {

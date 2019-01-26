@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helpers';
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti'
+import { handleLikeTweet } from '../actions/tweets';
 
 const Tweet = (props) => {
-  const { text, author, authorAvatar, timestamp, liked, likes, replies, replyingTo } = props;
+  const { text, author, authorAvatar, timestamp, liked, likes, replies, replyingTo, toggleLike, id } = props;
+  const filled = { color: 'rgb(224, 36, 94)' };
 
   return (
     <div className='tweet'>
@@ -15,17 +17,16 @@ const Tweet = (props) => {
         {replyingTo !== null && <div className='replying-to'>Replying To @{ replyingTo }</div>}
         <p>{ text }</p>
         <div className="tweet-icons">
-          <TiArrowBackOutline className='tweet-icon' /> <span className='buffer' /> { replies > 0 ? replies : ' ' }
+          <TiArrowBackOutline className='tweet-icon' /> <span className='buffer' /> { replies > 0 && replies }
           <span className='spacer' />
           {liked 
-            ? <TiHeartFullOutline style={{ color: 'rgb(224, 36, 94)' }} className='tweet-icon' /> 
-            : <TiHeartOutline className='tweet-icon' />} 
-          <span className='buffer' /> { likes > 0 ? likes : ' ' }
+            ? <TiHeartFullOutline onClick={ () => toggleLike(id, liked) } style={ filled } className='tweet-icon' /> 
+            : <TiHeartOutline onClick={ () => toggleLike(id, liked) } className='tweet-icon' />} 
+          <span className='buffer' /> { likes > 0 && likes }
         </div>
       </div>
     </div>
   )
-
 }
 
 const mapStateToProps = ({ users, tweets, authedUser }, { id }) => {
@@ -44,4 +45,15 @@ const mapStateToProps = ({ users, tweets, authedUser }, { id }) => {
   }
 }
 
-export default connect(mapStateToProps)(Tweet);
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleLike(id, liked) {
+      dispatch(handleLikeTweet({
+        id,
+        hasLiked: liked
+      }));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tweet);

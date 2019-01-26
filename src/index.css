@@ -39,6 +39,24 @@ body {
 .tweet-icons {
   display: flex;
   align-items: center;
+  color: #697784;
+  font-size: 20px;
+}
+
+.tweet-icon {
+  font-size: 27px;
+}
+.tweet-icon:hover {
+  color: #00b5d6;
+  cursor: pointer;
+}
+
+.spacer {
+  margin: 0 15px 0 5px;
+}
+
+.buffer {
+  margin: 5px;
 }
 
 .timestamp {

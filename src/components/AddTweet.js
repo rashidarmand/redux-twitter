@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleAddTweet } from '../actions/tweets';
 
 class AddTweet extends Component {
   state = {
     tweetText: ''
+  }
+
+  handleSubmit = () => {
+    const { saveTweet } = this.props;
+    const {tweetText } = this.state;
+    // @TODO get saveTweet dispatch working to add a new tweet
+    // Include author & replyingTo
+    // saveTweet({
+    //   text: this.state.tweetText,
+    //   author: ,
+    //   replyingTo: 
+    // })
   }
 
   handleChange = ({ target }) => {
@@ -37,7 +50,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    saveTweet(newTweet) {
+      dispatch(handleAddTweet(newTweet))
+    }
   }
 }
 

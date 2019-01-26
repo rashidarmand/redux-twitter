@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Tweet from './Tweet';
-import AddTweet from './AddTweet';
 import { connect } from 'react-redux';
 // import { formatDate, formatTweet } from '../utils/helpers';
 
@@ -18,7 +17,6 @@ class Timeline extends Component {
             </li>
           ))}
         </ul>
-        <AddTweet />
       </div>
     )
   }

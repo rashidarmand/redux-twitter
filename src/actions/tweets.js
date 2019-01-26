@@ -11,7 +11,7 @@ export function receiveTweets(tweets) {
   }
 }
 
-function likeTweet({ id, hasLiked, authedUser}) {
+function likeTweet({ id, hasLiked, authedUser }) {
   return {
     type: LIKE_TWEET,
     id,

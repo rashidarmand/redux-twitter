@@ -7,7 +7,6 @@ class TweetPage extends Component {
   render() {
     const { id, replies } = this.props;
 
-
     return (
       <div>
         <h2 style={style}>Tweet Page</h2>

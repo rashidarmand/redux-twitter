@@ -11,7 +11,7 @@ class TweetPage extends Component {
       <div>
         <h2 style={style}>Tweet Page</h2>
         <Tweet id={ id } />
-        <AddTweet />
+        <AddTweet replyingTo={ id } />
 
         <h3 style={style}>Replies</h3>
         <ul>

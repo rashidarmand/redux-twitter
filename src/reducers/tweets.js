@@ -22,12 +22,21 @@ export default function tweets(state = {}, action) {
       }
 
     case ADD_TWEET :
-      const { tweet } = action;
+      const { tweet, parentTweet } = action;
 
-      return {
-        ...state,
-        [tweet.id] : tweet
-      }
+      return parentTweet === null
+        ? {
+            ...state,
+            [tweet.id]: tweet
+          }
+        : {
+            ...state,
+            [tweet.id]: tweet,
+            [parentTweet]: {
+              ...state[parentTweet],
+              replies: state[parentTweet].replies.concat([ tweet.id ])
+            }
+          }
 
     default :
       return state;

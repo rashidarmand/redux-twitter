@@ -9,12 +9,12 @@ class AddTweet extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { saveTweet, author } = this.props;
+    const { saveTweet, author, replyingTo } = this.props;
 
     saveTweet({
       text: this.state.tweetText,
       author,
-      replyingTo: null
+      replyingTo
     })
 
     e.target.firstChild.value = '';
@@ -46,8 +46,9 @@ class AddTweet extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => ({
-  author: authedUser
+const mapStateToProps = ({ authedUser, tweets }, { replyingTo }) => ({
+  author: authedUser,
+  replyingTo: tweets[replyingTo] === undefined ? null : replyingTo
 })
 
 const mapDispatchToProps = (dispatch) => {

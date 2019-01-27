@@ -3,32 +3,28 @@ import Tweet from './Tweet';
 import AddTweet from './AddTweet';
 import { connect } from 'react-redux';
 
-class TweetPage extends Component {
-  render() {
-    const { id, replies } = this.props;
+const TweetPage = ({ id, replies }) => {
+  return (
+    <div>
+      <h2 style={style}>Tweet Page</h2>
+      <Tweet id={ id } />
+      <AddTweet replyingTo={ id } />
 
-    return (
-      <div>
-        <h2 style={style}>Tweet Page</h2>
-        <Tweet id={ id } />
-        <AddTweet replyingTo={ id } />
-
-        <h3 style={style}>Replies</h3>
-        <ul>
-          {replies.map(reply => (
-            <li key={ reply.id }>
-              <Tweet id={ reply.id } />
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
+      <h3 style={style}>Replies</h3>
+      <ul>
+        {replies.map(reply => (
+          <li key={ reply.id }>
+            <Tweet id={ reply.id } />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 const style = { textAlign: 'center' }
 
-const mapStateToProps = ({ users, tweets, authedUser }, { match }) => {
+const mapStateToProps = ({ tweets }, { match }) => {
   const { id } = match.params;
   const replies = tweets[id].replies
     .map(reply => tweets[reply])
@@ -40,10 +36,4 @@ const mapStateToProps = ({ users, tweets, authedUser }, { match }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TweetPage)
+export default connect(mapStateToProps)(TweetPage)

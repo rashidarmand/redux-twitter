@@ -9,7 +9,7 @@ class AddTweet extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { saveTweet, author, replyingTo } = this.props;
+    const { saveTweet, author, replyingTo, history } = this.props;
 
     saveTweet({
       text: this.state.tweetText,
@@ -17,8 +17,14 @@ class AddTweet extends Component {
       replyingTo
     })
 
+    // Clear textarea
     e.target.firstChild.value = '';
     this.setState({ tweetText: '' });
+
+    // redirect to '/' after new tweet using react router
+    if(window.location.href.includes('new-tweet')) {
+      history.push('/');
+    }
   }
 
   handleChange = ({ target }) => {
@@ -51,12 +57,10 @@ const mapStateToProps = ({ authedUser, tweets }, { replyingTo }) => ({
   replyingTo: tweets[replyingTo] === undefined ? null : replyingTo
 })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    saveTweet(newTweet) {
-      dispatch(handleAddTweet(newTweet))
-    }
+const mapDispatchToProps = (dispatch) => ({
+  saveTweet(newTweet) {
+    dispatch(handleAddTweet(newTweet))
   }
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTweet)
